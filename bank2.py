@@ -59,7 +59,6 @@ def withdraw_deposit(str1, card, account, pin, amount):
 
 
 def account_balance(card, pin):
-
     conn = sqlite3.connect("bankdata.db", isolation_level=None)
     c = conn.cursor()
     c.execute("SELECT * FROM 'bankdata' WHERE card=:idn1 AND pin=:idn2",
@@ -97,9 +96,12 @@ if __name__ == "__main__":
         print("NUM:", i + 1, "Account:", account[i][3], "| Balance:", account[i][5])
 
     # select action
-    select_account = input("\nSelect Account: ")
-    if (select_account == "exit"):
-        exit()
+    while (1):
+        select_account = input("\nSelect Account: ")
+        if (select_account == "exit"):
+            exit()
+        if (int(select_account) < len(account) + 1 and int(select_account) > 0):
+            break
 
     while (1):
         print("\n1. Deposit Balance")
